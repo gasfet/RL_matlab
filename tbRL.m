@@ -1,12 +1,13 @@
 % env = rlPredefinedEnv("CartPole-Discrete");
-env = cMyRLEnv();
+env = cMyRLEnv2();
 obsInfo = getObservationInfo(env);
 actInfo = getActionInfo(env);
 net = [
     featureInputLayer(obsInfo.Dimension(1))
     fullyConnectedLayer(20)
     reluLayer
-    fullyConnectedLayer(length(actInfo.Elements))
+    % fullyConnectedLayer(length(actInfo.Elements))
+    fullyConnectedLayer(actInfo.Dimension(1))
     ];
 net = dlnetwork(net);
 summary(net)
