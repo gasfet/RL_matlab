@@ -138,6 +138,10 @@ classdef cMyRLEnv < rl.env.MATLABEnvironment
             end
         end
 
+        function Force = getForce(obj, Action)
+            Force = Action;
+        end
+
         function plot(obj)
             % Initiate the visualization
             obj.Figure = figure('Visible','on','HandleVisibility','off');
@@ -211,7 +215,7 @@ classdef cMyRLEnv < rl.env.MATLABEnvironment
             end
         end
 
-        function updateActionInfo(this)
+        function updateActionInfo(obj)
             %this.ActionInfo.Elements = this.MaxForce*[-1 1];
         end
 
