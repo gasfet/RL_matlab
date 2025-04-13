@@ -42,21 +42,21 @@ classdef cMyRLEnv2 < rl.env.MATLABEnvironment
         function [Observation,Reward,IsDone,Info] = step(obj,Action)
             Info = [];
 
-            % Get action
-            Force = getForce(obj,Action);
+            Action = clip(Action, -100, 100);
 
             % Unpack state vector
             x = obj.State(1);
             y = obj.State(2);
-            Observation = [x;y];
+            Observation = [x+Action(1);y+Action(2)];
             obj.State = Observation;
 
-            IsDone = all([x-obj.Target(1) < 0.01 , y-obj.Target(2) < 0.01]); 
+            disp(sprintf("x= %2.f, y = %.2f",x,y));
+            IsDone = all([abs(x-obj.Target(1)) < 0.01 , abs(y-obj.Target(2)) < 0.01]);
             obj.IsDone = IsDone;
 
             % Get reward
             Reward = 1/sqrt((x-obj.Target(1))^2 + (y-obj.Target(2))^2);
-
+            % disp(Reward);
             % (Optional) Use notifyEnvUpdated to signal that the
             % environment has been updated (for example, to update the visualization)
             notifyEnvUpdated(obj);
