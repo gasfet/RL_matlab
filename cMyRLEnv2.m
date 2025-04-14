@@ -50,7 +50,7 @@ classdef cMyRLEnv2 < rl.env.MATLABEnvironment
             Observation = [x+Action(1);y+Action(2)];
             obj.State = Observation;
 
-            disp(sprintf("x= %2.f, y = %.2f",x,y));
+            % disp(sprintf("x= %2.f, y = %.2f",x,y));
             IsDone = all([abs(x-obj.Target(1)) < 0.01 , abs(y-obj.Target(2)) < 0.01]);
             obj.IsDone = IsDone;
 
